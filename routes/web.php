@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin', function () {
+    return view('admin.user.index');
+});
+Route::get('admin/edit', function () {
+    return view('admin.user.edit');
 });
