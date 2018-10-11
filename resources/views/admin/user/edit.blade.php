@@ -2,82 +2,75 @@
 @section('content')
 <div class="card">
     <div class="header">
-        <h4 class="title">Sửa thông tin</h4>
+        <h4 class="title">Thêm người dùng</h4>
     </div>
     <div class="content">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            @if(session('fail'))
+                <p class="alert alert-danger">{{ session('fail') }}</p>
+            @elseif(session('success'))
+                <p class="alert alert-success">{{ session('success') }}</p>
+            @endif
+            @if($errors->any()) 
+                <div class="alert alert-danger">
+                    <ul>
+                    @foreach($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                    </ul>
+                </div>
+                @endif
             <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label>ID</label>
-                        <input type="text" name="id" class="form-control border-input" disabled value="1">
+                <div class="col-md-4">
+                    <div class="form-group text-center">
+                        @if($user->picture != '')
+                        <img src="/storage/app/files/{{$user->picture}}" width="120px" alt="" />
+                        @else 
+                        <img src="{{$AdminUrl}}/img/tim_80x80.png" width="120px" alt="" /> 
+                        @endif
+                        <input type="file" name="picture" class="form-control" placeholder="Chọn ảnh" />
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="form-group">
-                        <label>Họ tên</label>
-                        <input type="text" name="fullname" class="form-control border-input" placeholder="Họ tên" value="Trần Nguyễn Gia Huy">
+                        <label>Khóa tài khoản</label>
+                        <input type="checkbox" name="active" {{($user->active==1)?'':'checked'}} value="1" />
                     </div>
-                </div>
-                <div class="col-md-3">
                     <div class="form-group">
-                        <label for="date">Ngày tạo</label>
-                        <input type="text" name="date" value="20/12/2016" class="form-control border-input" placeholder="Ngày tạo">
+                        <label>Tên người dùng</label>
+                        <input type="text" name="username" class="form-control border-input" placeholder="Họ tên" value="{{$user->username}}" >
                     </div>
-                </div>
-                <div class="col-md-1">
                     <div class="form-group">
-                        <label for="read">Lượt đọc</label>
-                        <input type="text" name="read" value="20" class="form-control border-input" placeholder="Lượt đọc">
+                        <label>Mật khẩu</label>
+                        <input type="password" name="password" class="form-control border-input" placeholder="Mật khẩu" value="">
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
                     <div class="form-group">
-                        <label>Danh mục bạn bè</label>
-                        <select name="friend_list" class="form-control border-input">
-                        	<option value="">Bạn quen thời phổ thông</option>
-                        	<option>Bạn quen thời đại học</option>
-                        	<option>Bạn tâm giao</option>
+                        <label>Email</label>
+                        <input type="text" name="email" class="form-control border-input" placeholder="email" value="{{$user->email}}">
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" name="phone" class="form-control border-input" placeholder="Số điện thoại" value="{{$user->phone}}">
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" name="address" class="form-control border-input" placeholder="Địa chỉ" value="{{$user->address}}">
+                    </div>
+                    <div class="form-group">
+                        <label>Cấp bậc</label>
+                        <select name="role" class="form-control border-input" >
+                            @if(Auth::user()->role ==1)
+                            <option value="1" {{ ($user->role == 1)?'selected':'' }}>Admin</option>
+                            <option value="2" {{ ($user->role == 2)?'selected':'' }}>Mod</option>
+                            @endif
+                            <option value="3" {{ ($user->role == 3)?'selected':'' }}>Customer</option>
                         </select>
                     </div>
                 </div>
             </div>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <input type="file" name="picture" class="form-control" placeholder="Chọn ảnh" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Ảnh cũ</label>
-                        <img src="{{$AdminUrl}}/img/tim_80x80.png" width="120px" alt="" /> Xóa <input type="checkbox" name="delete_picture" value="1" />
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Mô tả</label>
-                        <textarea rows="4" class="form-control border-input" placeholder="Mô tả tóm tắt về bạn của bạn"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Chi tiết</label>
-                        <textarea rows="6" class="form-control border-input" placeholder="Mô tả chi tiết về bạn của bạn"></textarea>
-                    </div>
-                </div>
-            </div>
-            
             <div class="text-center">
                 <input type="submit" class="btn btn-info btn-fill btn-wd" value="Thực hiện" />
             </div>

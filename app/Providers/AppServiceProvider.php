@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-
+use App\ParentCategory;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('PublicUrl', getenv('TEMPLATE_PUBLIC_URL'));
         View::share('AdminUrl', getenv('TEMPLATE_ADMIN_URL'));
+        View::share('parentCats', ParentCategory::all());
     }
 
     /**

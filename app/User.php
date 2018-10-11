@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username','email','phone','password','facebook','address','picture','role','active','created_at','updated_at'
     ];
 
     /**
@@ -27,4 +27,45 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getRememberToken()
+     {
+       return null; // not supported
+     }
+
+     public function setRememberToken($value)
+     {
+       // not supported
+     }
+
+     public function getRememberTokenName()
+     {
+       return null; // not supported
+     }
+
+     public function checkUsername($username,$id){
+        $checkUsername = User::where('username',$username)->where('id','!=',$id)->get();
+        if(count($checkUsername) > 0){
+            return false;
+        }else{
+            return true;
+        }
+     }
+     function checkEmail($email,$id){
+        $checkEmail = User::where('email',$email)->where('id','!=', $id)->get(); 
+        if(count($checkEmail) > 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+     function checkPhone($phone,$id){
+        $checkPhone = User::where('phone',$phone)->where('id','!=', $id)->get(); 
+        if(count($checkPhone) > 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

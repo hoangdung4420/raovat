@@ -1,0 +1,44 @@
+<div class="jumbotron boder-solid" style="background: #fbfbfb;margin-bottom: 0px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<p>Liên lạc</p>
+				<h5>Tầng 17 Tòa nhà Center Building - Hapulico Complex, số 1 Nguyễn Huy Tưởng, Quận Thanh Xuân, TP Hà Nội.</h5>
+
+				 <h5>Lienhe@rongbay.com</h5>
+
+				<h5>CSKH: 024 73095555 (Ext: 497 / 818). Fax: 024 39743413 
+				       Kinh doanh: 0932 223 656</h5>
+
+				 <h5>0936 194 226</h5>
+			</div>
+			<div class="col-md-2">
+				<p>Pages</p>
+				<h5><a href="">Giới thiệu</a></h5>
+				<h5><a href="">Tin mới</a></h5>
+				<h5><a href="">Quy định chung</a></h5>
+				<h5><a href="">Câu hỏi thường gặp</a></h5>
+				<h5><a href="">Trợ giúp</a></h5><!-- dẫn tới contact, phía trên là list new_cats-->
+			</div>
+			<div class="col-md-3 text-center">
+				<p>Mạng xã hội</p>
+				<div class="row ">
+						<a href=""><i class="fa fa-facebook fa-2x"></i></a>
+						<a href=""><i class="fa fa-twitter fa-2x"></i></a>
+						<a href=""><i class="fa fa-youtube fa-2x"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="jumbotron footer1">
+	<div class="container text-center">
+		@for( $i=1;$i< 50;$i++)
+		<a href=""><label class="tag1">Công Ty</label></a>
+		@endfor
+	</div>
+</div>
+<script src="{{$AdminUrl}}/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="{{$AdminUrl}}/js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+</html>

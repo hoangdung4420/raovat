@@ -3,12 +3,12 @@
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="/">Dự án được phát triển bởi: Trần Nguyễn Gia Huy - Khóa ABC</a>
+                            <a href="/">Website Rao vặt - Đồ án tốt nghiệp</a>
                         </li>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://vinaenter.edu.vn">VinaEnter Edu</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, người thực hiện <i class="fa fa-heart heart"></i> <a href="#">Nguyễn Hoàng Dung</a>
                 </div>
             </div>
         </footer>
@@ -18,10 +18,8 @@
 </div>
 
 
-</body>
 
     <!--   Core JS Files   -->
-    <script src="{{$AdminUrl}}/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="{{$AdminUrl}}/js/bootstrap.min.js" type="text/javascript"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
@@ -30,5 +28,5 @@
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="{{$AdminUrl}}/js/demo.js"></script>
 
-
+</body>
 </html>
