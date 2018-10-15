@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="row">
-	<br />
 	<div class="col-md-7" style="border-right:  2px solid #eee">
 		@for($i=1;$i<=12;$i++)
 			<a href=""><div class="col-md-3 cast-total">

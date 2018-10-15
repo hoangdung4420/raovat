@@ -24,8 +24,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group text-center">
-                        <img src="{{$AdminUrl}}/img/tim_80x80.png" width="120px" alt="" /> 
-                        <input type="file" name="picture" class="form-control" placeholder="Chọn ảnh"  />
+                        <img src="{{$AdminUrl}}/img/tim_80x80.png" class="displayImg img-responsive" alt="" /> 
+                        <input type="file" name="picture" class="form-control inputImg" placeholder="Chọn ảnh"  />
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -68,4 +68,23 @@
         </form>
     </div>
 </div>
+<script>
+    //upload 1 ảnh
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('.displayImg').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$(".inputImg").change(function() {
+  readURL(this);
+});
+</script>
 @stop

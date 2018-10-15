@@ -26,7 +26,7 @@ class UserController extends Controller
     }
 
     public function postAdd(AddUserRequest $req){
-        $ar=[
+        $ar=[ 
             'username'=> $req->username,
             'password' => bcrypt(trim($req->password)),
             'email' =>$req->email,
@@ -63,10 +63,6 @@ class UserController extends Controller
     public function postEdit(Request $req,$id){
     	$obj = User::findOrFail($id);
     	
-        //kiểm tra email đã tồn tại chưa
-    	if(!$this->mUser->checkUsername( $req->username,$id)){
-            return redirect()->back()->with('fail','Tên người dùng đã tồn tại');
-        }
         //kiểm tra email đã tồn tại chưa
         if(!$this->mUser->checkEmail( $req->email,$id)){
             return redirect()->back()->with('fail','Email đã tồn tại');

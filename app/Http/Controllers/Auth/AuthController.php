@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePasswordRequest;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\AuthLoginRequest;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 class AuthController extends Controller
@@ -21,23 +21,22 @@ class AuthController extends Controller
 		}else{
 			return view('auth.login');
 		}
-	}
+	} 
 
-	public function postLogin(LoginRequest $request){
+	public function postLogin(AuthLoginRequest $request){
 		//đăng nhập của ban quản trị web
-		$username = $request->username;
+		$email = $request->email;
 		$password = $request->password;
 
 		$result = Auth::attempt([
-			'username' => $username,
+			'email' => $email,
 			'password' => $password,
 			'active' => 1
 		]);
 
 		if($result && Auth::user()->role < 3){
 			return redirect()->route('auth.getprofile')->with('success','Đăng nhập thành công');
-		}
-		else{
+		}else{
 			return redirect()->route('auth.getlogin')->with('fail','Tài khoản không tồn tại');
 		}
 	}

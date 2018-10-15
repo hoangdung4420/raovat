@@ -47,6 +47,7 @@ class CategoryController extends Controller
         ];
 
         $result = ParentCategory::insert($ar);
+
         if($result){
         	return redirect()->route('admin.category.indexparent')->with('success','Thêm thành công');
         }else{
@@ -129,6 +130,7 @@ class CategoryController extends Controller
     	];
 
     	$result = ChildCategory::insert($ar);
+      
     	if($result){
         	return redirect()->route('admin.category.indexchild',$req->parent_id)->with('success','Thêm thành công');
         }else{

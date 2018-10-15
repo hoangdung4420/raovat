@@ -99,3 +99,8 @@
 	border: 1px solid #ddd;
 	padding: 10px;
 }
+img.col-md-4{
+	height: 80px;
+	margin: 0px;
+	padding: 2px;
+}

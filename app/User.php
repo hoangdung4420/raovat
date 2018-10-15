@@ -46,15 +46,23 @@ class User extends Authenticatable
      public function checkUsername($username,$id){
         $checkUsername = User::where('username',$username)->where('id','!=',$id)->get();
         if(count($checkUsername) > 0){
-            return false;
+            return false;//đã tồn tại  trả về false
         }else{
             return true;
         }
      }
-     function checkEmail($email,$id){
+    public  function checkEmail($email,$id){
         $checkEmail = User::where('email',$email)->where('id','!=', $id)->get(); 
         if(count($checkEmail) > 0){
             return false;
+        }else{
+            return true;
+        }
+    }
+    public function checkExistEmail($email){
+        $checkEmail = User::where('email',$email)->get(); 
+        if(count($checkEmail) > 0){
+            return false;//đã tồn tại  trả về false
         }else{
             return true;
         }

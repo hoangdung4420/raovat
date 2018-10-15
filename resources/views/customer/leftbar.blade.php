@@ -1,7 +1,7 @@
 <h3 class="header-title">TRANG CÁ NHÂN</h3>
 <div class="list-group">
   
-  <a href="#" class="list-group-item ">Quản Lý Tin đăng</a>
+  <a href="{{route('customer.listpost')}}" class="list-group-item {{ Request::is('danhsachtindang')?'active':''}}">Quản Lý Tin đăng</a>
   <a href="#" class="list-group-item">Quản Lý Tin lưu</a>
   <a href="#" class="list-group-item ">Lịch Sử Hỏi/Đáp</a>
   <a href="#" class="list-group-item ">Tài khoản</a>

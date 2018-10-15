@@ -23,31 +23,33 @@
                 <div class="col-md-4 text-center">
                     <div class="form-group">
                         @if(Auth::user()->picture == '')
-                            <img src="{{$AdminUrl}}/img/tim_80x80.png" width="120px" alt="" />
+                            <img src="{{$AdminUrl}}/img/tim_80x80.png"  alt=""  class="displayImg img-responsive"  />
                         @else 
-                            <img src="/storage/app/files/{{Auth::user()->picture}}" width="120px" alt="" />
+                            <img src="/storage/app/files/{{Auth::user()->picture}}" alt="" class="displayImg  img-responsive" />
                         @endif
                         
-                        <input type="file" name="picture" class="form-control" placeholder="Chọn ảnh" />
+                        <input type="file" name="picture" class="form-control inputImg" placeholder="Chọn ảnh" />
                     </div>
                 </div>
                 <div class="col-md-8">
-                	<div class="">
-                		<label>{{ Auth::user()->username }}</label>
-                	</div>
                     <div class="">
                         <div class="form-group">
-                            <input type="text" name="email" class="form-control border-input" placeholder="email" value="{{ Auth::user()->email }}">
+                            <input type="text" name="username" class="form-control border-input" placeholder="username" value="{{ Auth::user()->username }}" required="">
                         </div>
                     </div>
                     <div class="">
                         <div class="form-group">
-                            <input type="text" name="phone" class="form-control border-input" placeholder="Số điện thoại" value="{{ Auth::user()->phone }}">
+                            <input type="text" name="email" class="form-control border-input" placeholder="email" value="{{ Auth::user()->email }}" required="">
                         </div>
                     </div>
                     <div class="">
                         <div class="form-group">
-                            <input type="text" name="address" class="form-control border-input" placeholder="Địa chỉ" value="{{ Auth::user()->address }}">
+                            <input type="text" name="phone" class="form-control border-input" placeholder="Số điện thoại" value="{{ Auth::user()->phone }}" required="">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group">
+                            <input type="text" name="address" class="form-control border-input" placeholder="Địa chỉ" value="{{ Auth::user()->address }}" required="">
                         </div>
                     </div>
                     <div class="">
@@ -59,5 +61,25 @@
         </form>
   </div>
 </div>
+<script>
+    
+//upload 1 ảnh
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('.displayImg').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$(".inputImg").change(function() {
+  readURL(this);
+});
+</script>
 
 @stop

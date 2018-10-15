@@ -41,7 +41,7 @@ Route::group(['prefix'=>'qt','namespace'=>'Auth'], function(){
 	Route::get('logout', 'AuthController@logout')->name('auth.logout');
 });
 
-Route::group(['namespace'=>'Admin','prefix'=>'admin'], function(){
+Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'], function(){
 	Route::group(['prefix'=>'user'], function(){
 		Route::get('index', 'UserController@index')->name('admin.user.index');
 		Route::get('add', 'UserController@getAdd')->name('admin.user.getadd');
@@ -69,19 +69,33 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function(){
 	});
 });
 
-Route::group(['prefix'=>'taikhoan'], function(){
-	Route::get('dangky','CustomerController@getRegister')->name('customer.getregister');
-	
-	Route::get('dangnhap','CustomerController@getLogin')->name('customer.getlogin');
-	Route::post('dangnhap','CustomerController@postLogin')->name('customer.postlogin');
+Route::group(['prefix'=>'taikhoancanhan','middleware'=>'auth'], function(){
 	Route::get('thongtincanhan','CustomerController@getProfile')->name('customer.getprofile');
 	Route::post('thongtincanhan','CustomerController@postProfile')->name('customer.postprofile');
 	Route::get('thaydoimatkhau', 'CustomerController@getChangePassword')->name('customer.getchangepassword');
 	Route::post('thaydoimatkhau', 'CustomerController@postChangePassword')->name('customer.postchangepassword');
+	Route::get('danhsachtindang','CustomerController@listPost')->name('customer.listpost');
 });
 
 Route::group(['prefix' => ''], function(){
 	//trang public
+	Route::get('dangky','PageController@getRegister')->name('public.getregister');
+	Route::post('dangky','PageController@postRegister')->name('public.postregister');
+
+	Route::get('dangnhap','PageController@getLogin')->name('public.getlogin');
+	Route::post('dangnhap','PageController@postLogin')->name('public.postlogin');
+
+	Route::get('dangtin/b1','PageController@getPost1')->name('public.getpost1');
+	Route::get('dangtin/{id}/b2','PageController@getPost2')->name('public.getpost2');
+	Route::post('dangtin/{id}/b2','PageController@postPost2')->name('public.postpost2');
+	Route::get('childcat','PageController@getChildCat')->name('public.childcat');
+	Route::get('changecat','PageController@changeCat')->name('public.changecat');
+
+	Route::get('changedistrict','PageController@changeDistrict')->name('public.changedistrict');
+	Route::get('changevillage','PageController@changeVillage')->name('public.changevillage');
+	Route::get('test','PageController@getTest')->name('public.gettest');//nháp
+	Route::post('test','PageController@postTest')->name('public.posttest');//nháp
+
 	Route::get('/', 'PageController@index')->name('public.index');
 
 	Route::get('/cat', 'PageController@cat')->name('public.cat');

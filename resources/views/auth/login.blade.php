@@ -42,16 +42,15 @@
         @endif
     </div>
     <div class="content">
-        <form action="{{route('auth.postlogin')}}" method="post">
+        <form action="" method="post">
             {!! csrf_field() !!}
-            
             <div class="row">
                 <div class="col-md-4 ">
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control border-input"  placeholder="username" value="{{ old('username') }}" required autofocus>
-                        @if ($errors->has('username'))
+                        <input type="email" name="email" class="form-control border-input"  placeholder="email" value="{{ old('email') }}" required autofocus>
+                        @if ($errors->has('email'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('username') }}</strong>
+                            <strong>{{ $errors->first('email') }}</strong>
                         </span>
                         @endif
                     </div>

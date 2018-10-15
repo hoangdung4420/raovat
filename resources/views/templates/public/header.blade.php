@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="{{$AdminUrl}}/css/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="{{$AdminUrl}}/css/custom.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src="{{$AdminUrl}}/js/jquery-1.10.2.js" type="text/javascript"></script>
  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <script src="/public/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -30,7 +32,9 @@
         <li class="active" width="100px"><a href="#">	
 <i class="fa fa-search"> </i> Tìm Kiếm</a></li>
         <li ><a href="#">Trợ giúp</a></li>
-        <li><a href="" class="btn btn-warning" style="padding: 5px;margin-top: 10px">Đăng tin</a></li>
+        <li>
+          <a href="{{route('public.getpost1')}}" class="btn btn-warning" style="padding: 5px;margin-top: 10px" id="send_post">Đăng tin</a>
+        </li>
         @if(Auth::check())
         	@if(Auth::user()->role < 3)
        	 		<li><a href="{{ route('auth.getprofile') }}">Trang cá nhân</a></li>
@@ -40,14 +44,14 @@
 
         <li><a href="{{ route('auth.logout') }}">Thoát</a></li>
         @else
-        <li><a href="{{ route('customer.getregister')}}">Đăng ký</a></li>
-        <li><a href="{{ route('customer.getlogin') }}">Đăng nhập</a></li>
+        <li><a href="{{ route('public.getregister')}}">Đăng ký</a></li>
+        <li><a href="{{ route('public.getlogin') }}">Đăng nhập</a></li>
         @endif
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </div>		
-<div style="height: 65px">
+<div style="height: 80px">
   
 </div>
 

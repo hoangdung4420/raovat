@@ -3,15 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\User;
-class LoginRequest extends FormRequest
+
+class AuthLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+   public function authorize()
     {
         return true;
     }
@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            "email" => "required|email",
+            "email" => "required|min:6",
             "password" => "required|min:6",
         ];
     }
@@ -33,7 +33,7 @@ class LoginRequest extends FormRequest
     {
         return [
             "email.required" => "Vui lòng nhập email",
-            "email.email" => "Không phải là email",
+            "email.min" => "email phải lớn hơn 6 kí tự",
             "password.required" => "Vui lòng nhập mật khẩu",
             "password.min" => "Vui lòng nhập mật khẩu lớn hơn 6 ký tự",
         ];
