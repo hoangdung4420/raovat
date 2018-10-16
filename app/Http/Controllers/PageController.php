@@ -19,7 +19,6 @@ use App\District;
 use App\Village;
 use App\Street;
 use App\Post;
-use App\Picture;
 use App\Approval;
 
 class PageController extends Controller
@@ -95,7 +94,7 @@ public function getPost2($id,Request $req){
 }
 
 public function postPost2(AddPostRequest $req){
-    //Kiểm tra có đăng nhập ko
+    //Kiểm tra có đăng nhập ko 
     if(!Auth::check()){
         $email = $req->email;
         if($this->mUser->checkExistEmail($email)){
@@ -134,10 +133,12 @@ public function postPost2(AddPostRequest $req){
             'district_id'=>$req->district_id,
             'village_id'=>$req->village_id,
             'id_home'=>$req->id_home,
+            'map'=>'x',
             'title'=>$req->title,
             'detail'=>$req->detail,
             'user_id'=>$id,
             'view'=>0,
+            'sell'=>0
         ];
         if($req->street_id != 'a'){
             $arPost['street_id']=$req->street_id;
@@ -149,21 +150,21 @@ public function postPost2(AddPostRequest $req){
         }elseif($cat->price == 1){
             $arPost['price1']=$req->price1;
         }
-       $post_id =Post::insertGetId($arPost);
-    //lưu ảnh
+        //lưu ảnh
        $pictures = $req->picture;
+       $listPicture='';
         foreach($pictures as $picture)
         {
           $tmp = $picture->store('files');
           $arTmp = explode('/', $tmp);
-          $picture = end($arTmp);
           
-          $arPicture = [
-            'post_id'=>$post_id,
-            'name'=>$picture
-          ];
-          Picture::insert($arPicture);
+          $listPicture .= end($arTmp).'|';//lưu tên ảnh thành 1 chuỗi ngăn cách bằng dấu "|"
         }
+        $listPicture = chop($listPicture,'|');//xóa kí tự '|' cuối cùng của chuỗi
+        $arPost['pictures']=$listPicture;
+        //thêm tin đăng
+       $post_id =Post::insertGetId($arPost);
+    
     //lưu vào bảng phê duyệt
         $arApproval = [
             'post_id'=>$post_id,

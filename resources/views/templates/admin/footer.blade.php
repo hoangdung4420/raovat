@@ -3,7 +3,7 @@
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="/">Website Rao vặt - Đồ án tốt nghiệp</a>
+                            <a href="{{ route('public.index') }}">Website Rao vặt - Đồ án tốt nghiệp</a>
                         </li>
                     </ul>
                 </nav>
@@ -16,9 +16,6 @@
 
     </div>
 </div>
-
-
-
     <!--   Core JS Files   -->
 	<script src="{{$AdminUrl}}/js/bootstrap.min.js" type="text/javascript"></script>
 

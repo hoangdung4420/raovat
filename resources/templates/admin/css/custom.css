@@ -104,3 +104,24 @@ img.col-md-4{
 	margin: 0px;
 	padding: 2px;
 }
+.list-inline li>a{
+	font-size: 18px;
+	color: #aaa;
+}
+.list-inline li>a:hover{
+	text-decoration: none;
+	color: #333;
+}
+.list-inline .active>a{
+	color: #333;
+}
+.list-inline .active{
+	border-bottom: 2px solid #ffba00;
+}
+.list-inline li{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+}
+.ql-tin{
+	margin-bottom: 15px;
+}

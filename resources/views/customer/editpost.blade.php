@@ -5,15 +5,19 @@
       <i class="fa fa-home"></i>
       <strong>{{$parentCat->name}}</strong>
       <i class="fa fa-angle-right"></i>
-      <strong>{{$childCat->name}}</strong> |
-	     <span class="btn btn-primary" id ="Redirect">Thay đổi chuyên mục</span>
+      <strong>{{$childCat->name}}</strong>
+	     
   </div>
   
 </div>
 <div class="clearfix"></div>
   <br>
   <div>
-    <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+    @php 
+        $name = str_slug($post->title);
+        $id = $post->id;
+    @endphp
+    <form action="{{route('customer.savepost',['name'=>$name,'id'=>$id])}}" method="post" class="form-horizontal" enctype="multipart/form-data">
       {{csrf_field()}}
       @if(session('fail'))
           <p class="alert alert-danger">{{ session('fail') }}</p>
@@ -32,7 +36,7 @@
         </div>
         @endif
       <div class="col-md-7">
-      <input type="hidden" name="cat_id" value="{{$childCat->id}}">
+      <input type="hidden" name="cat_id" value="{{$post->cat_id}}">
 
       <div class="form-group">
         <label class="col-md-3">Vị trí:</label>
@@ -41,7 +45,7 @@
             <select name="district_id" id="district" class="form-control" onchange="return changeDistrict()">
               <option value="a">Quận/Huyện (*):</option>
               @foreach($districts as $district)
-              <option value="{{$district->id}}">{{$district->name}}</option>
+              <option value="{{$district->id}}" {{ ($post->district_id)?'selected':'' }} >{{$district->name}}</option>
               @endforeach
             </select>
         </div>
@@ -51,18 +55,24 @@
         <div class="col-md-9" >
             <select name="village_id" id="village" class="form-control" onchange="return changeVillage()">
               <option value="a">Phường/Xã(*)</option>
+              @foreach($villages as $village)
+              <option value="{{$village->id}}" {{ ($post->village_id)?'selected':'' }} >{{$village->name}}</option>
+              @endforeach
             </select>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-3"></label>
         <div class="col-md-3">
-          <input type="text" name="id_home" value=" {{ old('id_home') }}" placeholder="Số Nhà" class="form-control">
+          <input type="text" name="id_home" value=" {{ $post->id_home }}" placeholder="Số Nhà" class="form-control">
         </div>
 
         <div class="col-md-6">
             <select name="street_id" class="form-control" id="street">
               <option value="a">Đường/Phố</option>
+              @foreach($streets as $street)
+              <option value="{{$street->id}}" {{ ($post->street_id)?'selected':'' }} >{{$street->name}}</option>
+              @endforeach
             </select>
         </div>
       </div>
@@ -70,33 +80,33 @@
       <div class="form-group">
         <label class="col-md-3">Mức lương từ :</label>
         <div class="col-md-9">
-            <input type="text" name="price1" class="form-control" value="{{old('price1')}}">
+            <input type="text" name="price1" class="form-control" value="{{$post->price1}}">
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-3">Mức lương đến:</label>
         <div class="col-md-9">
-            <input type="text" name="price2" class="form-control" value="{{old('price2')}}">
+            <input type="text" name="price2" class="form-control" value="{{$post->price2}}">
         </div>
       </div>
       @elseif($childCat->price == 1) 
       <div class="form-group">
         <label class="col-md-3">Giá tiền:</label>
         <div class="col-md-9">
-            <input type="text" name="price1" class="form-control" value="{{old('price1')}}">
+            <input type="text" name="price1" class="form-control" value="{{$post->price1}}">
         </div>
       </div>
       @endif
       <div class="form-group">
         <label class="col-md-3">Tiêu đề (*):</label>
         <div class="col-md-9">
-            <input type="text" name="title" class="form-control" value="{{old('title')}}" >
+            <input type="text" name="title" class="form-control" value="{{$post->title}}" >
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-3">Nội dung (*):</label>
         <div class="col-md-9">
-            <textarea name="detail" class="form-control ckeditor" >{{old('detail')}}</textarea>
+            <textarea name="detail" class="form-control ckeditor" >{{$post->detail}}</textarea>
         </div>
       </div>
       <div class="form-group">
@@ -105,6 +115,12 @@
             <input class="form-control inputImg" type="file" name="picture[]" multiple />
             <span>Chọn tối đa 6 hình.</span>
             <div id="displayImg">
+              @php 
+                $arPicture = explode('|',$post->pictures);
+              @endphp
+              @foreach($arPicture as $picture)
+              <img src="/storage/app/files/{{$picture}}" alt="" id="Img" class="col-md-4 img-responsive" />
+              @endforeach
             </div>
         </div>
       </div>
@@ -135,26 +151,18 @@
       </div>
     </div>
     <div class="clearfix"></div>
-     @php 
-      $username ='';
-      $email ='';
-
-      if(Auth::check()){
-        $username = Auth::user()->username;
-        $email = Auth::user()->email;
-      }
-      @endphp
+     
     <div class="col-md-7">
       <div class="form-group">
         <label class="col-md-3">Người liên hệ (*):</label>
         <div class="col-md-9">
-            <input type="text" name="username" class="form-control" value="{{ $username }}">
+            <input type="text" name="username" class="form-control" value="{{ Auth::user()->username }}">
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-3">email (*):</label>
         <div class="col-md-9">
-            <input type="email" name="email" class="form-control" value="{{$email}}"  {{ (Auth::check())?'readonly':''}}>
+            <input type="email" name="email" class="form-control" value="{{Auth::user()->email}}"  readonly>
         </div>
       </div>
     </div>
@@ -178,10 +186,7 @@
   window.addEventListener('popstate', function(event) {
                history.pushState(null, null, '');
   });
-  //thay doi chuyen muc
-  $('#Redirect').click(function(){
-      window.location='{{route("public.changecat")}}';
-  });
+  
   //liên quan đến input vị trí
 function changeDistrict(){
   district = $('#district').val()
@@ -207,6 +212,7 @@ function changeDistrict(){
 
 function changeVillage(district){
   district = $('#district').val();
+
   $.ajax({
     url:'{{route("public.changevillage")}}',
     method:'GET',
@@ -218,7 +224,6 @@ function changeVillage(district){
         html ='<option value="a">Đường/Phố(*)</option>';
         $.each(result,function(key,item){
             html +='<option value="'+key+'">'+item+'</option>';
-
         });
       $('#street').html(html);
     },

@@ -38,7 +38,6 @@
 		@endfor
 	</div>
 </div>
-<script src="{{$AdminUrl}}/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="{{$AdminUrl}}/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

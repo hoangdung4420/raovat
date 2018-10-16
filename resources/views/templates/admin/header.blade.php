@@ -44,7 +44,7 @@
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="{{ route('public.index') }}" class="simple-text">Rao vặt</a>
+                <a href="" class="simple-text alert-warning">AdminCP</a>
             </div>
 
             <ul class="nav">
@@ -60,19 +60,36 @@
                         <p>Danh mục sản phẩm</p>
                     </a>
                 </li>
-            	 <li class="">
+                <li>
                     <a href="index.html">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Danh sách bạn bè</p>
+                        <i class="ti-view-list"></i>
+                        <p class="text-warning">Danh sách Tin</p>
                     </a>
                 </li>
                 <li>
                     <a href="index.html">
-                        <i class="ti-panel"></i>
-                        <p>Danh sách video</p>
+                        <i class="ti-pencil-alt"></i>
+                        <p class="text-warning">Duyệt Tin</p>
                     </a>
                 </li>
-                
+                <li>
+                    <a href="index.html">
+                        <i class="ti-rss-alt"></i>
+                        <p class="text-warning">Tin tức</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <i class="ti-comment"></i>
+                        <p class="text-warning">Danh sách hỏi/đáp</p>
+                    </a>
+                </li>
+                <li class="{{Request::is('*introduction*')?'active':''}}">
+                    <a href="{{ route('admin.introduction.index')}}">
+                        <i class="ti-home"></i>
+                        <p>Giới thiệu Website</p>
+                    </a>
+                </li>
             </ul>
     	</div>
     </div>
