@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="header">
-        <h4 class="title">Danh Sách Khách Hàng</h4>
+        <h4 class="title">Quản Lý Khách Hàng</h4>
         @if(session('fail'))
                 <p class="alert alert-danger">{{ session('fail') }}</p>
                 @elseif(session('success'))
@@ -32,11 +32,11 @@
                     	<td>{{ $user->id }}</td>
                     	<td>{{ $user->username }}</td>
                         <td>{{ $user->created_at }}</td>
-                        <td>
+                        <td class="active_{{$user->id}}">
                             @if($user->active == 1)
-                                <p class="btn btn-success">active</p>
-                            @else 
-                                <p class="btn btn-danger">disative</p>
+                                <p class="btn btn-success status" onclick="return changeActive({{ $user->id }})">active</p>
+                            @else  
+                                <p class="btn btn-danger status" onclick="return changeActive({{ $user->id }})">disactive</p>
                             @endif
                         </td>
                         <td><a href="">>></a></td>
@@ -55,6 +55,23 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+        function changeActive(id){
+          $.ajax({
+            url:'{{route("admin.user.changeactive")}}',
+            method:'GET',
+            data:{
+                'id':id,
+            },
+            dataType:'html',
+            success: function(result){
+                var a = '.active_'+id;
+                $(a).html(result);
+            },
+            error:function(){
+              alert('sai');
+            }
+          });
+        }
     </script>
     </div>
 </div>

@@ -9,6 +9,10 @@ use App\ChildCategory;
 use App\District;
 use App\Village;
 use App\Street;
+use App\Introduction;
+use App\NewsCat;
+use App\Approval;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         View::share('districts', District::all());
         View::share('villages', Village::all());
         View::share('streets', Street::all());
+        View::share('introductions', Introduction::pluck('detail','title')->toArray());
+        View::share('newscats', NewsCat::all());
     }
 
     /**

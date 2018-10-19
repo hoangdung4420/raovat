@@ -98,6 +98,7 @@ public function editPost($name,$id){
     return view('customer.editpost',['title'=>$title,'post'=>$post,'approval'=>$approval,'childCat'=>$childCat,'parentCat'=>$parentCat]);
 }
 public function savePost(EditPostRequest $req,$name,$id){
+
     $post = Post::findOrFail($id);
     $childCat = ChildCategory::findOrFail($post->cat_id);
     $post->district_id = $req->district_id;
@@ -141,13 +142,18 @@ public function savePost(EditPostRequest $req,$name,$id){
         $user->username = $req->username;
         $user->save();
     }
+
     $result = $post->save();
-
+    //sửa lại approval-???có vấn đề
+    $approval = Approval::where('post_id',$id)->get();
+    $approval[0]->user_id = 0;
+    $approval[0]->status = 1;
+    $approval[0]->reason = '';
+    $approval[0]->save();
+    
     if($result){
-        return redirect()->route('customer.listrefuse')->with('success','Thành công');
+        return redirect()->route('customer.listwait')->with('success','Thành công');
     }
-       
-
 }
 /*xoa tin*/
 public function delPost($id){

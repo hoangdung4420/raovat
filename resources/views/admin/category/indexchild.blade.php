@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="header">
-        <h4 class="title">Danh sách danh mục con của <strong>{{ $parentCat->name }}</strong></h4>
+        <h4 class="title">Quản Lý danh mục con của <strong>{{ $parentCat->name }}</strong></h4>
         @if(session('fail'))
                 <p class="alert alert-danger">{{ session('fail') }}</p>
                 @elseif(session('success'))

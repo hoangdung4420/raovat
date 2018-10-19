@@ -89,6 +89,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'], func
 	//Trang quản lý
 	Route::group(['prefix'=>'user'], function(){
 		Route::get('index', 'UserController@index')->name('admin.user.index');
+		Route::get('changeactive','UserController@changeActive')->name('admin.user.changeactive');
 		Route::get('add', 'UserController@getAdd')->name('admin.user.getadd');
 		Route::post('add', 'UserController@postAdd')->name('admin.user.postadd');
 		Route::get('edit/{id}', 'UserController@getEdit')->name('admin.user.getedit');
@@ -111,10 +112,32 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'], func
 		Route::post('editchild/{id}','CategoryController@postEditChild')->name('admin.category.posteditchild');
 		Route::get('delchild/{id}','CategoryController@delChild')->name('admin.category.delchild');
 	});
+	Route::group(['prefix'=>'post'],function(){
+		Route::get('','PostController@index')->name('admin.post.index');
+	});
+	Route::group(['prefix'=>'news'],function(){
+		Route::get('','NewsController@index')->name('admin.news.index');
+		Route::get('add','NewsController@getAdd')->name('admin.news.getadd');
+		Route::post('add','NewsController@postAdd')->name('admin.news.postadd');
+		Route::get('edit/{id}','NewsController@getEdit')->name('admin.news.getedit');
+		Route::post('edit/{id}','NewsController@postEdit')->name('admin.news.postedit');
+		Route::get('del/{id}','NewsController@del')->name('admin.news.del');
+		Route::get('change-active','NewsController@changeActive')->name('admin.news.changeactive');
+	});
 	Route::group(['prefix'=>'introduction'], function(){
 		Route::get('index','IntroductionController@index')->name('admin.introduction.index');
 		Route::get('edit/{id}','IntroductionController@getEdit')->name('admin.introduction.getedit');
 		Route::post('edit/{id}','IntroductionController@postEdit')->name('admin.introduction.postedit');
+
 	});
+
+	Route::group(['prefix'=>'approval'],function(){
+		Route::get('','ApprovalController@index')->name('admin.approval.index');
+		Route::get('wait','ApprovalController@indexWait')->name('admin.approval.indexwait');
+		Route::get('refuse','ApprovalController@indexRefuse')->name('admin.approval.indexrefuse');
+		Route::get('post','ApprovalController@indexPost')->name('admin.approval.indexpost');
+		Route::get('approval/{id}','ApprovalController@getApproval')->name('admin.approval.approval');
+	});
+
 });
 

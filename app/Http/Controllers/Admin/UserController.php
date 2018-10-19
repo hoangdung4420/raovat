@@ -20,6 +20,20 @@ class UserController extends Controller
         return view('admin.user.index',['title'=>$title,'users'=>$users]);
     }
 
+    public function changeActive(Request $req){
+        $id = $req->id;
+        $user = User::findOrFail($id);
+        if($user->active == 0){
+            $user->active = 1;
+            $html = '<p class="btn btn-success status" onclick="return changeActive({{ $val->id }})">active</p>';
+        }else{
+            $user->active = 0;
+            $html = '<p class="btn btn-danger status" onclick="return changeActive({{ $val->id }})">disactive</p>';
+        }
+        $user->save();
+        echo $html;
+    }
+
     public function getAdd(){
         $title = "QL-người dùng";
         return view('admin.user.add',['title'=>$title]);

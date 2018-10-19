@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="header">
-        <h4 class="title">Danh Sách Danh Mục Cha</h4>
+        <h4 class="title">Quản Lý Danh Mục Cha</h4>
         @if(session('fail'))
                 <p class="alert alert-danger">{{ session('fail') }}</p>
                 @elseif(session('success'))

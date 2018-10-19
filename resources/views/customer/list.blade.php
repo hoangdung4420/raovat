@@ -20,14 +20,14 @@
 	@endif
 		<div class="ql-tin">
 			<ul class="list-inline text-center">
-				<li class="col-md-4 {{Request::is('*dang*')?'active':''}}"><a href="{{route('customer.listpost')}}">Đang bán ({{$tinDang}})</a></li>
+				<li class="col-md-4 {{Request::is('*dang*')?'active':''}}"><a href="{{route('customer.listpost')}}">Đăng ({{$tinDang}})</a></li>
 				<li class="col-md-4 {{Request::is('*tuchoi*')?'active':''}}"><a href="{{route('customer.listrefuse')}}">Bị từ chối ({{$tinTuChoi}})</a></li>
 				<li class="col-md-4 {{Request::is('*choduyet*')?'active':''}}"><a href="{{route('customer.listwait')}}">Chờ ({{$tinCho}})</a></li>
 			</ul>
 			<div class="clearfix"></div>
 		</div>
 		@if(count($arPosts) ==0 )
-			<p class="alert alert-danger text-center">Không có tin nào</p>
+			<p class="alert alert-warning text-center">Không có tin nào</p>
 		@else 
 		<div class="table-responsive "> <!-- -->
         <table class="table table-hover " id="example" ><!--   -->

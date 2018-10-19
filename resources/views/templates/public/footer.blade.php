@@ -1,16 +1,8 @@
 <div class="jumbotron boder-solid" style="background: #fbfbfb;margin-bottom: 0px;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7">
-				<p>Liên lạc</p>
-				<h5>Tầng 17 Tòa nhà Center Building - Hapulico Complex, số 1 Nguyễn Huy Tưởng, Quận Thanh Xuân, TP Hà Nội.</h5>
-
-				 <h5>Lienhe@rongbay.com</h5>
-
-				<h5>CSKH: 024 73095555 (Ext: 497 / 818). Fax: 024 39743413 
-				       Kinh doanh: 0932 223 656</h5>
-
-				 <h5>0936 194 226</h5>
+			<div class="col-md-7 " id="address">
+				{!! $introductions['địa chỉ'] !!}
 			</div>
 			<div class="col-md-2">
 				<p>Pages</p>
@@ -23,9 +15,9 @@
 			<div class="col-md-3 text-center">
 				<p>Mạng xã hội</p>
 				<div class="row ">
-						<a href=""><i class="fa fa-facebook fa-2x"></i></a>
-						<a href=""><i class="fa fa-twitter fa-2x"></i></a>
-						<a href=""><i class="fa fa-youtube fa-2x"></i></a>
+						<a href="{{$introductions['facebook']}}"><i class="fa fa-facebook fa-2x"></i></a>
+						<a href="{{$introductions['youtobe']}}"><i class="fa fa-twitter fa-2x"></i></a>
+						<a href="{{$introductions['instagram']}}"><i class="fa fa-youtube fa-2x"></i></a>
 				</div>
 			</div>
 		</div>

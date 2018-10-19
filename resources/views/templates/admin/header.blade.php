@@ -36,6 +36,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
     <script src="/public/ckeditor/ckeditor.js"></script>
+      <link rel="stylesheet" href="{{$AdminUrl}}/css/custom.css" type="text/css">
 
 </head>
 <body>
@@ -51,7 +52,7 @@
                 <li class="{{Request::is('*user*')?'active':''}}">
                     <a href="{{ route('admin.user.index') }}">
                         <i class="ti-user"></i>
-                        <p>Danh sách người dùng</p>
+                        <p>Người Dùng</p>
                     </a>
                 </li>
             	<li class="{{Request::is('*category*')?'active':''}}">
@@ -60,30 +61,31 @@
                         <p>Danh mục sản phẩm</p>
                     </a>
                 </li>
-                <li>
-                    <a href="index.html">
+                <li class="{{Request::is('*post*')?'active':''}}">
+                    <a href="{{route('admin.post.index')}}">
                         <i class="ti-view-list"></i>
-                        <p class="text-warning">Danh sách Tin</p>
+                        <p>Tin Rao Vặt(thiếu add,edit,del)</p>
                     </a>
                 </li>
-                <li>
-                    <a href="index.html">
+                <li class="{{Request::is('*approval*')?'active':''}}">
+                    <a href="{{route('admin.approval.index')}}">
                         <i class="ti-pencil-alt"></i>
-                        <p class="text-warning">Duyệt Tin</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html">
-                        <i class="ti-rss-alt"></i>
-                        <p class="text-warning">Tin tức</p>
+                        <p>Duyệt Tin (phần edit chưa xong)</p>
                     </a>
                 </li>
                 <li>
                     <a href="index.html">
                         <i class="ti-comment"></i>
-                        <p class="text-warning">Danh sách hỏi/đáp</p>
+                        <p class="text-warning">Hỏi/Đáp</p>
                     </a>
                 </li>
+                <li class="{{ (Request::is('*news*')?'active':'') }}">
+                    <a href="{{Route('admin.news.index')}}">
+                        <i class="ti-rss-alt"></i>
+                        <p>Tin tức</p>
+                    </a>
+                </li>
+                
                 <li class="{{Request::is('*introduction*')?'active':''}}">
                     <a href="{{ route('admin.introduction.index')}}">
                         <i class="ti-home"></i>
